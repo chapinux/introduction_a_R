@@ -1,0 +1,32 @@
+---
+title: "Introduction à R"
+author: "Paul Chapron - ENSG"
+date: "4 novembre 2019"
+output: ioslides_presentation
+css : style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Repo Git
+
+Support disponible sur 
+
+
+## R et Rstudio 
+
+RStudio est l' *IDE* de R:
+
+- Editeur
+- Console 
+- Environnement (objets en mémoire)
+- Affichage des graphiques et Aide
+
+
+
+## Points forts et faiblesses 
+
+The main advantages of R are the fact that Ris freeware and that there is a lot of help availableonline.  It is quite similar to other programmingpackages such as MatLab (not freeware), but moreuser-friendly than programming languages such asC++ or Fortran.  You can use R as it is, but foreducational purposes we prefer to use R in combi-nation with the RStudio interface (also freeware),which  has an  organized layout and  several  extraoptions.
+
