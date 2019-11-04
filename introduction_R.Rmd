@@ -8,25 +8,206 @@ css : style.css
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(rmarkdown)
 ```
 
-## Repo Git
+## Ressources
 
-Support disponible sur 
+Quasi-infinité de ressources en lignes, parmi lesquelles :
+
+  - **Quick-R** https://www.statmethods.net/about/sitemap.html
+  
+  - les cheat-sheets : 
+    - **R** https://rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf
+    - **dplyr** https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf
+    - **ggplot2** https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf
+    
+Diapositives de ce cours disponibles sur 
+
+https://github.com/chapinux/introduction_a_R
 
 
 ## R et Rstudio 
 
+R est un outil dédié aux statistiques et à l'analyse de données, à la fois: 
+
+  - un langage de programmation 
+  - un logiciel (interpréteur, console, gestion I/O, affichage )
+
+
 RStudio est l' *IDE* de R:
 
 - Editeur
-- Console 
+- Console R
 - Environnement (objets en mémoire)
 - Affichage des graphiques et Aide
+- Gestion des fichiers, packages
+
+
+## Points forts
+
+  - Combo R-Rstudio **gratuit**, **libre** et **multi-plateformes**
+
+  - Polyvalence et flexibilité («on peut tout faire avec R»)
+
+  - Packages spécialisés  : 15192 packages officiels https://cran.r-project.org/web/views/
+
+  - Graphiques de haute qualité (`ggplot2`)
+
+  - Manipulation de données (`dplyr`, `readr`)
+
+  - Modernité : Applet shiny,  RStudio Server, programmation fonctionnelle 
+
+  - En évolution constante
+
+## Points faibles
+
+  - Courbe de progression "raide"
+  - Éparpillement (relatif) cf. python ou javascript
+  - Performances <span style="color:red">&#9888; dans certains cas (e.g. boucles imbriquées)</span> 
+  - Mémoire :  pas de gestion fine, ni streaming <span style="color:red">&#9888; de base</span>
+  - 3D limitée 
+  - Interactivité limitée (user input)
+
+Pour les développeurs : 
+<div style="font-size: 0.8em;">
+  - Maintenabilité du code / package 
+  - Mono-threaded , programmation parallèle non-immédiate 
+</div> 
+
+ 
+##  Rstudio vite fait 
+
+4 panels : 
+
+  1. Éditeur
+  2. Environnement
+  3. Consoles
+  4. affichage (graphiques et doc notamment)
+
+## 6 raccourcis quotidiens 
+
+Complétion : touche <span style="border:1px solid ;">TAB</span>
+
+Affichage documentation: curseur sur mot-clé puis touche <span style="border:1px solid ;">F1</span>  
+
+Commande précédente (historique console) :  touche <span style="border:1px solid ;">&#129105;</span>
+
+Effacer le contenu de la console  : <span style="border:1px solid ;">Ctrl</span> + <span style="border:1px solid ;"> L</span>
+
+Focus(curseur) sur Console : <span style="border:1px solid ;">Ctrl</span> + <span style="border:1px solid ;"> 2</span>
+
+Focus(curseur) sur Éditeur : <span style="border:1px solid ;">Ctrl</span> + <span style="border:1px solid ;"> 1</span>
+
+<span style="font-size: 0.6em;">
+Liste complète sur: https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts
+ </span>
+ 
+ 
+# Concepts du langage <br> <span style="font-size: 0.6em;">Doc, packages, répertoire </span>
+
+## Afficher la documentation dans Rstudio
+
+Pour une fonction e.g. `mean`  :
+
+```{r help1, echo=TRUE}
+?mean
+# ou
+help("mean")
+```
+
+
+Pour un terme 
+
+```{r help2, echo=TRUE}
+help.search("chi square")
+```
+
+Pour un package 
+```{r help3, echo=TRUE}
+help(package = "dplyr") 
+```
+
+
+## Installer et charger un package
+
+
+Package R : ensemble de fonctions, parfois accompagnées de données
+
+Le chargement d'un package rend toutes ses fonctions disponibles
+
+```{r pack, echo=TRUE, eval=FALSE}
+install.packages("dplyr")
+
+```
+
+
+```{r pack2, echo=TRUE, message=FALSE, warning=FALSE}
+library(dplyr) # charge le package 
+data("starwars") #invoque le dataset starwars
+paged_table(head(starwars)) #premières lignes  du dataset
+```
 
 
 
-## Points forts et faiblesses 
 
-The main advantages of R are the fact that Ris freeware and that there is a lot of help availableonline.  It is quite similar to other programmingpackages such as MatLab (not freeware), but moreuser-friendly than programming languages such asC++ or Fortran.  You can use R as it is, but foreducational purposes we prefer to use R in combi-nation with the RStudio interface (also freeware),which  has an  organized layout and  several  extraoptions.
+## Working directory
 
+Connaître le repertoire de travail: fonction `getwd()`
+
+Définir le répertoire de travail:  
+```{r path1, eval=FALSE, echo=TRUE}
+setwd("le/path/vers/l'emplacement/")
+```
+
+Pour windows: 
+```{r path2, eval=FALSE, echo=TRUE}
+setwd("C:\\path\\bizarrrement\\exprimé\\vers\\l'emplacement")`
+```
+
+<span style="color:red">&#9888; éviter les espaces et accents dans les chemins </span> 
+
+# Concepts du langage <br> <span style="font-size: 0.6em;"> Données et Structures de données</span>
+
+
+## Affectation 
+
+## Classe et Structure d'un objet 
+
+## Listes
+
+## Vecteurs
+
+## Tableaux 
+
+## Dataframes
+
+## Matrices
+
+## Lire un fichier 
+
+
+
+# Concepts du langage <br> <span style="font-size: 0.6em;">Structure de contrôle du langage </span>
+
+
+## Conditionnelles
+
+## Logique
+
+
+## Boucles
+
+
+## Fonction
+
+
+# les librairies du futur <br> <span style="font-size: 0.6em;">dplyr, sf et  ggplot2 </span>
+
+
+## dplyr
+
+## sf 
+
+
+## ggplot2
