@@ -155,7 +155,9 @@ paged_table(head(starwars)) #premières lignes  du dataset
 
 Connaître le repertoire de travail: fonction `getwd()`
 
-Définir le répertoire de travail:  
+Définir le répertoire de travail
+
+Unix:  
 ```{r path1, eval=FALSE, echo=TRUE}
 setwd("le/path/vers/l'emplacement/")
 ```
@@ -169,23 +171,152 @@ setwd("C:\\path\\bizarrrement\\exprimé\\vers\\l'emplacement")`
 
 # Concepts du langage <br> <span style="font-size: 0.6em;"> Données et Structures de données</span>
 
-
 ## Affectation 
 
-## Classe et Structure d'un objet 
+ 
+ Signe `<-` ou `=`
+```{r affect1, echo=TRUE, message=TRUE,error=TRUE}
+x <-  1
+x*2      # affichage sortie standard
+x <- "abc"
+x 
+x <-  4
+x + "b"
+```
 
-## Listes
 
-## Vecteurs
+##  classes 
 
-## Tableaux 
+La fonction `class` renvoie la classe des objets R 
+
+```{r class1, echo=TRUE}
+w <-  12.5
+class(w)
+x <-  TRUE
+class(x)
+y <-  "abc"
+class(y)
+```
+
+## classes 
+
+```{r class2, echo=TRUE}
+z1 <-  c("Leonardo", "Rapahelo", "Michelangelo", "Donatello")
+class(z1)
+z2 <-  c(1,3,5,7,9)
+class(z2)
+```
+
+```{r class3, echo=TRUE, eval=FALSE}
+z3 <-  c(1,3,5,7,"pouet")
+class(z3) # ? 
+```
+Quelle est la classe de z3 ? Pourquoi ?
+<br>
+On peut faire un peu de POO en R, nous ne le ferons pas.
+
+## Aperçu des collections et tableaux 
+
+Vecteurs définis  par `c()` (extension) 
+
+```{r vec, echo=TRUE}
+w <-  c(1,2,3,4,5)
+w + 1 
+```
+ou `vector(mode, length)` (initialisation,  ~intension)
+```{r vec2, echo=TRUE}
+v <-  vector("character", 5)
+v 
+```
+
+Tous les éléments doivent être de même type 
+
+## Aperçu des collections et tableaux 
+
+Tableaux définis par `array(data, dim )`
+
+```{r tab, echo=TRUE}
+v <-  array("go", c(2,3))
+v 
+```
+
+Matrices 
+
+```{r matb, echo=TRUE}
+m <-  matrix(1, nrow = 4, ncol = 8)
+m 
+```
+
+## Objets structurés
+
+Objets plus complexes  (~struct en C, named tuple en python)
+
+
+
+```{r list, echo=TRUE}
+tmnt <-  list(
+              nom= c("leo", "raph", "mick", "don"), 
+              couleur =c("bleu","rouge", "orange", "violet"), 
+              age=17:14
+              )
+tmnt
+```
+
+
+## Objets structurés imbriqués
+
+<span style="font-size:0.8em;"> les attributs peuvent être de longueur différentes,  un attribut peut lui même être une liste :  <span>
+
+
+```{r list2, echo=TRUE}
+nested <- list(tmnt= tmnt, 
+              auteurs =c("Kevin Eastman","Peter Laird"), 
+              annee_parution= 1984)
+nested
+```
+
 
 ## Dataframes
 
-## Matrices
+Si tous les attributs d'un objet/liste ont la **même taille**, on parle de **dataframe** (~cf panda en python). 
 
-## Lire un fichier 
+Format courant (et fortement conseillé) : 
 
+  - **variables** en **colonnes** 
+  - **individus** (observations) en **lignes**
+
+
+Le dataframe est l'objet standard de R. 
+```{r df}
+data(iris)
+iris
+```
+
+
+## Sélection dans un tableau 
+
+Pour un d'un dataframe `df`
+
+Élément ligne `i` colonne `j`  : `df[i,j]`
+
+Toutes les lignes , colonne `j` :  `df[,j]`
+
+Toutes les colonnes , ligne `i` :  `df[i,]`
+
+Toutes les lignes sauf la ligne `i` , toutes les colonnes : `df[-i,]`
+
+
+## Lire un fichier : un exemple de  doc
+
+`read.csv(file, header = TRUE, sep = ",", quote = "\"", dec = ".", fill = TRUE, comment.char = "", ...)`
+
+- N.B. arguments avec **valeurs par défaut** 
+- Description : ce que fait la fonction  
+- Usage : comment l'écrire  
+- Arguments : quoi fournir à la fonction 
+- Details : détails (!)
+- Value : valeur et type retournés 
+- [...]
 
 
 # Concepts du langage <br> <span style="font-size: 0.6em;">Structure de contrôle du langage </span>
@@ -193,21 +324,178 @@ setwd("C:\\path\\bizarrrement\\exprimé\\vers\\l'emplacement")`
 
 ## Conditionnelles
 
-## Logique
+```{r if, echo=TRUE }
+x <-  rnorm(1)
+if(x>0.5){
+  cat("Pile")
+}else{
+  cat("Face")
+}
+
+```
+
+
+Au passage : 
+
+  - `rnorm()` échantillone selon une loi normale  
+  - `cat()` affiche sur la sortie standard / concatène (~print)
+
+## Conditionnelles
+
+
+|opérateur|syntaxe|
+|------|------|
+|AND | `x && y` |
+|OR | `x \|\| y` |
+|XOR| `xor(x,y)` |
+|NOT| `!x` |
+|missing ? | `is.na(x)`|
+|null ? | `is.null(x)`|
+<br>
+ + opérateurs binaires classiques:   `>, < , >= , <=, == , != ,  %in% `
 
 
 ## Boucles
 
+```{r loop, echo=TRUE}
+
+for(i in 1:10){
+  xx <-  i * 2 
+  cat(xx, " ")
+  }
+
+```
+
+<span style="color:red">&#9888; </span> Au-delà de deux boucles imbriquées, les performances de R s'effondrent  
+
+
+## Boucles 
+
+Toute séquence peut être utilisée pour l'itération :
+
+```{r loop2, echo=TRUE}
+
+for(i in LETTERS){
+  print(i)
+  }
+```
+
+## Boucles 
+
+```{r loop3, echo=TRUE}
+i <- 0
+while(i < 15){
+  i <- i+1 
+  cat(i,"")
+  }
+```
+
+## Boucles
+
+
+Fonction pratiques pour générer des séquences : `seq` et `rep`
+
+```{r seq, echo=TRUE}
+seq(from=24, by= 0.33, length.out = 17)
+```
+
+```{r rep, echo=TRUE}
+rep(c("lundi", "mardi", "mercredi", "jeudi"), 4)
+```
+
+```{r repgaga, echo=TRUE}
+cat(c((rep("po-", 4)),"ker face"), sep="")
+```
+
+ <div style="text-align:right; top:-100px;">
+<img src="./gaga.jpg", width=10%>
+</div>
 
 ## Fonction
 
 
-# les librairies du futur <br> <span style="font-size: 0.6em;">dplyr, sf et  ggplot2 </span>
+```{r userfonc, echo=TRUE, eval=FALSE}
+nom_de_la_fonction <- function(arg1, arg2, ...){ 
+    ⋮
+  code de la fonction 
+    ⋮
+    ⋮ 
+    ⋮
+  return(resultat)
+}
+```
+
+# les librairies du futur <br> <span style="font-size: 0.6em;">dplyr, sf, cartography et  ggplot2 </span>
 
 
 ## dplyr
 
+Transformation, combinaison, requêtage de données 
+
+
+e.g. : `group_by, filter, intersects, union, join, n_distinct` 
+
+
+https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+
 ## sf 
+
+package de manipulation de données spatiales (vecteur), implémente la norme sf (Simple Feature) , comme postgis.
+
+La géométrie des objets "voyage" avec eux à chaque opération.
+
 
 
 ## ggplot2
+
+```{r ggplotdemo, echo=TRUE, warning=FALSE,cache=TRUE, message=FALSE}
+library(ggplot2)
+ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species)) + 
+  geom_point()+
+  geom_smooth()
+```
+
+https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf
+
+
+## cartography
+```{r cartodemo, message=FALSE, fig.height=5, cache=TRUE}
+library(sf)
+library(cartography)
+path_to_gpkg <- system.file("gpkg/mtq.gpkg", package="cartography")
+mtq <- st_read(dsn = path_to_gpkg, quiet = TRUE)
+mtq$POPDENS <- as.numeric(1e6 * mtq$POP / st_area(mtq))
+mtq.contig <- getBorders(mtq)
+plot(st_geometry(mtq), col = NA, border = NA, bg = "lightblue1", 
+     xlim = c(690574, 745940))
+choroLayer(x = mtq, var = "MED",
+           breaks = c(min(mtq$MED), seq(13000, 21000, 2000), max(mtq$MED)),
+           col = carto.pal("green.pal", 6),border = "white", lwd = 0.5, 
+           legend.pos = "topright", legend.title.txt = "Median Income\n(euros)",
+           add = TRUE)
+discLayer(
+  x = mtq.contig, 
+  df = mtq, 
+  var = "MED",
+  type = "rel", 
+  method = "geom", 
+  nclass = 3,
+  threshold = 0.4,
+  sizemin = 0.7, 
+  sizemax = 6, 
+  col = "red4",
+  legend.values.rnd = 1, 
+  legend.title.txt = "Relative\nDiscontinuities", 
+  legend.pos = "right",
+  add = TRUE
+)
+# Layout
+layoutLayer(title = "Wealth Disparities in Martinique, 2015", 
+            author =  paste0("cartography ", packageVersion("cartography")),
+            sources = "Sources: Insee and IGN, 2018",
+            frame = FALSE, scale = 5, tabtitle = TRUE,theme = "grey.pal")
+```
+
+https://cran.r-project.org/web/packages/cartography/vignettes/cartography.html
+
+https://rgeomatic.hypotheses.org/category/cartography
