@@ -577,6 +577,30 @@ nested</pre>
 ## 149          6.2         3.4          5.4         2.3  virginica
 ## 150          5.9         3.0          5.1         1.8  virginica</pre>
 
+</article></slide><slide class=""><hgroup><h2>Dataframes</h2></hgroup><article  id="dataframes-1">
+
+<p>Les colonnes d&#39;un dataframe sont nommées: <code>names(mydata)</code></p>
+
+<pre class = 'prettyprint lang-r'>data(iris)
+names(iris)</pre>
+
+<pre >## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot; 
+## [5] &quot;Species&quot;</pre>
+
+<p>opérateur de sélection d&#39;attributs <code>$</code> (colonne pour les dataframe) ~notation pointée en POO</p>
+
+<pre class = 'prettyprint lang-r'>iris$Sepal.Length </pre>
+
+<pre >##   [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4
+##  [18] 5.1 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5
+##  [35] 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0 7.0
+##  [52] 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0 6.1 5.6 6.7 5.6 5.8
+##  [69] 6.2 5.6 5.9 6.1 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0 5.4
+##  [86] 6.0 6.7 6.3 5.6 5.5 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 5.1 5.7 6.3 5.8
+## [103] 7.1 6.3 6.5 7.6 4.9 7.3 6.7 7.2 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7
+## [120] 6.0 6.9 5.6 7.7 6.3 6.7 7.2 6.2 6.1 6.4 7.2 7.4 7.9 6.4 6.3 6.1 7.7
+## [137] 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8 6.7 6.7 6.3 6.5 6.2 5.9</pre>
+
 </article></slide><slide class=""><hgroup><h2>Sélection dans un tableau</h2></hgroup><article  id="selection-dans-un-tableau">
 
 <p>Pour un d&#39;un dataframe <code>df</code></p>

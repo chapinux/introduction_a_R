@@ -292,6 +292,23 @@ data(iris)
 iris
 ```
 
+## Dataframes
+
+Les colonnes d'un dataframe sont nommées: `names(mydata)`
+
+
+```{r df2, echo=TRUE}
+data(iris)
+names(iris)
+```
+
+opérateur de sélection d'attributs `$` (colonne pour les dataframe) ~notation pointée en POO
+
+```{r df3, echo=TRUE}
+iris$Sepal.Length 
+```
+
+
 
 ## Sélection dans un tableau 
 
@@ -424,6 +441,10 @@ nom_de_la_fonction <- function(arg1, arg2, ...){
   return(resultat)
 }
 ```
+
+
+
+
 
 # les librairies du futur <br> <span style="font-size: 0.6em;">dplyr, sf, cartography et  ggplot2 </span>
 
