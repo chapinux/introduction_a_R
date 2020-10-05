@@ -600,7 +600,7 @@ library(tmap)
 data("World")
 data("metro")
 tm_shape(World) + tm_polygons("income_grp")+
-  tm_shape(metro) + tm_bubbles("pop2020", col = "growth")+
+  tm_shape(metro) + tm_bubbles("pop2020", col = "blue")+
   tm_style("classic")
 ```
 
