@@ -32,7 +32,7 @@ Quasi-infinité de ressources en lignes, parmi lesquelles :
     - **dplyr** https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf
     - **ggplot2** https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf
     
-Diapositives de ce cours disponibles sur 
+Diapositives de ce cours disponibles et quelques pdfs sur 
 
 https://github.com/chapinux/introduction_a_R
 
