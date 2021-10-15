@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="author" content="M2 IGAST" />
+  <meta name="author" content="M2 IGAST &amp; DESIGEO" />
   <title>Introduction à R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,26 +12,27 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -40,9 +41,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -507,6 +508,7 @@ style.innerHTML = style_script;
 document.getElementsByTagName('head')[0].appendChild(style);
 </script>
 
+    <script src="introduction_R_files/header-attrs-2.11/header-attrs.js"></script>
     <link href="introduction_R_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
     <script src="introduction_R_files/pagedtable-1.1/js/pagedtable.js"></script>
 </head>
@@ -516,8 +518,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 
 <section>
     <h1 class="title">Introduction à R</h1>
-    <h2 class="author">M2 IGAST</h2>
-    <h3 class="date">2020-2021</h3>
+    <h2 class="author">M2 IGAST &amp; DESIGEO</h2>
+    <h3 class="date">2021-2022</h3>
 </section>
 
 <section id="ressources" class="slide level2">
@@ -525,7 +527,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p>Quasi-infinité de ressources en lignes, parmi lesquelles :</p>
 <ul>
 <li><p><strong>Quick-R</strong> <a href="https://www.statmethods.net/about/sitemap.html" class="uri">https://www.statmethods.net/about/sitemap.html</a></p></li>
-<li>les cheat-sheets :
+<li><p>les cheat-sheets :</p>
 <ul>
 <li><strong>R</strong> <a href="https://rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf" class="uri">https://rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf</a></li>
 <li><strong>dplyr</strong> <a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf" class="uri">https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf</a></li>
@@ -602,52 +604,65 @@ Pour les développeurs :
 <p>Focus(curseur) sur Éditeur : <span style="border:1px solid ;">Ctrl</span> + <span style="border:1px solid ;"> 1</span></p>
 <p><span style="font-size: 0.6em;"> Liste complète sur: <a href="https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts" class="uri">https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts</a> </span></p>
 </section>
-<section><section id="concepts-du-langage-doc-packages-répertoire" class="title-slide slide level1"><h1>Concepts du langage <br> <span style="font-size: 0.6em;">Doc, packages, répertoire </span></h1></section><section id="afficher-la-documentation-dans-rstudio" class="slide level2">
+<section>
+<section id="concepts-du-langage-doc-packages-répertoire" class="title-slide slide level1">
+<h1>Concepts du langage <br> <span style="font-size: 0.6em;">Doc, packages, répertoire </span></h1>
+
+</section>
+<section id="afficher-la-documentation-dans-rstudio" class="slide level2">
 <h2>Afficher la documentation dans Rstudio</h2>
 <p>Pour une fonction e.g. <code>mean</code> :</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">?mean</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="co"># ou</span></a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">help</span>(<span class="st">&quot;mean&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>?mean</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ou</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
 <p>Pour un terme</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">help.search</span>(<span class="st">&quot;chi square&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help.search</span>(<span class="st">&quot;chi square&quot;</span>)</span></code></pre></div>
 <p>Pour un package</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">help</span>(<span class="dt">package =</span> <span class="st">&quot;dplyr&quot;</span>) </a></code></pre></div>
-</section><section id="installer-et-charger-un-package" class="slide level2">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package =</span> <span class="st">&quot;dplyr&quot;</span>) </span></code></pre></div>
+</section>
+<section id="installer-et-charger-un-package" class="slide level2">
 <h2>Installer et charger un package</h2>
 <p>Package R : ensemble de fonctions, parfois accompagnées de données</p>
 <p>Le chargement d’un package rend toutes ses fonctions disponibles</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(dplyr) <span class="co"># charge le package </span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="kw">data</span>(<span class="st">&quot;starwars&quot;</span>) <span class="co">#invoque le dataset starwars</span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="kw">paged_table</span>(<span class="kw">head</span>(starwars)) <span class="co">#premières lignes  du dataset</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># charge le package </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;starwars&quot;</span>) <span class="co">#invoque le dataset starwars</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">paged_table</span>(<span class="fu">head</span>(starwars)) <span class="co">#premières lignes  du dataset</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["height"],"name":[2],"type":["int"],"align":["right"]},{"label":["mass"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hair_color"],"name":[4],"type":["chr"],"align":["left"]},{"label":["skin_color"],"name":[5],"type":["chr"],"align":["left"]},{"label":["eye_color"],"name":[6],"type":["chr"],"align":["left"]},{"label":["birth_year"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["sex"],"name":[8],"type":["chr"],"align":["left"]},{"label":["gender"],"name":[9],"type":["chr"],"align":["left"]},{"label":["homeworld"],"name":[10],"type":["chr"],"align":["left"]},{"label":["species"],"name":[11],"type":["chr"],"align":["left"]},{"label":["films"],"name":[12],"type":["list"],"align":["right"]},{"label":["vehicles"],"name":[13],"type":["list"],"align":["right"]},{"label":["starships"],"name":[14],"type":["list"],"align":["right"]}],"data":[{"1":"Luke Skywalker","2":"172","3":"77","4":"blond","5":"fair","6":"blue","7":"19.0","8":"male","9":"masculine","10":"Tatooine","11":"Human","12":"<chr [5]>","13":"<chr [2]>","14":"<chr [2]>"},{"1":"C-3PO","2":"167","3":"75","4":"NA","5":"gold","6":"yellow","7":"112.0","8":"none","9":"masculine","10":"Tatooine","11":"Droid","12":"<chr [6]>","13":"<chr [0]>","14":"<chr [0]>"},{"1":"R2-D2","2":"96","3":"32","4":"NA","5":"white, blue","6":"red","7":"33.0","8":"none","9":"masculine","10":"Naboo","11":"Droid","12":"<chr [7]>","13":"<chr [0]>","14":"<chr [0]>"},{"1":"Darth Vader","2":"202","3":"136","4":"none","5":"white","6":"yellow","7":"41.9","8":"male","9":"masculine","10":"Tatooine","11":"Human","12":"<chr [4]>","13":"<chr [0]>","14":"<chr [1]>"},{"1":"Leia Organa","2":"150","3":"49","4":"brown","5":"light","6":"brown","7":"19.0","8":"female","9":"feminine","10":"Alderaan","11":"Human","12":"<chr [5]>","13":"<chr [1]>","14":"<chr [0]>"},{"1":"Owen Lars","2":"178","3":"120","4":"brown, grey","5":"light","6":"blue","7":"52.0","8":"male","9":"masculine","10":"Tatooine","11":"Human","12":"<chr [3]>","13":"<chr [0]>","14":"<chr [0]>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-</section><section id="working-directory" class="slide level2">
+</section>
+<section id="working-directory" class="slide level2">
 <h2>Working directory</h2>
 <p>Connaître le repertoire de travail: fonction <code>getwd()</code></p>
 <p>Définir le répertoire de travail</p>
 <p>Unix:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">setwd</span>(<span class="st">&quot;le/path/vers/l&#39;emplacement/&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;le/path/vers/l&#39;emplacement/&quot;</span>)</span></code></pre></div>
 <p>Pour windows:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">setwd</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">path</span><span class="ch">\\</span><span class="st">bizarrrement</span><span class="ch">\\</span><span class="st">exprimé</span><span class="ch">\\</span><span class="st">vers</span><span class="ch">\\</span><span class="st">l&#39;emplacement&quot;</span>)<span class="st">`</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">path</span><span class="sc">\\</span><span class="st">bizarrrement</span><span class="sc">\\</span><span class="st">exprimé</span><span class="sc">\\</span><span class="st">vers</span><span class="sc">\\</span><span class="st">l&#39;emplacement&quot;</span>)<span class="st">`</span></span></code></pre></div>
 <p><span style="color:red">⚠ éviter les espaces et accents dans les chemins </span></p>
 </section></section>
-<section><section id="concepts-du-langage-données-et-structures-de-données" class="title-slide slide level1"><h1>Concepts du langage <br> <span style="font-size: 0.6em;"> Données et Structures de données</span></h1></section><section id="affectation" class="slide level2">
+<section>
+<section id="concepts-du-langage-données-et-structures-de-données" class="title-slide slide level1">
+<h1>Concepts du langage <br> <span style="font-size: 0.6em;"> Données et Structures de données</span></h1>
+
+</section>
+<section id="affectation" class="slide level2">
 <h2>Affectation</h2>
 <p>Signe <code>&lt;-</code> ou <code>=</code></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">x &lt;-<span class="st">  </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb8-2" title="2">x<span class="op">*</span><span class="dv">2</span>      <span class="co"># affichage sortie standard</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span>  <span class="dv">1</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x<span class="sc">*</span><span class="dv">2</span>      <span class="co"># affichage sortie standard</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">x &lt;-<span class="st"> &quot;abc&quot;</span></a>
-<a class="sourceLine" id="cb10-2" title="2">x </a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">&quot;abc&quot;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>x </span></code></pre></div>
 <pre><code>## [1] &quot;abc&quot;</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">x &lt;-<span class="st">  </span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb12-2" title="2">x <span class="op">+</span><span class="st"> &quot;b&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span>  <span class="dv">4</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> <span class="st">&quot;b&quot;</span></span></code></pre></div>
 <pre><code>## Error in x + &quot;b&quot;: argument non numérique pour un opérateur binaire</code></pre>
-</section><section id="nom-de-variables" class="slide level2">
+</section>
+<section id="nom-de-variables" class="slide level2">
 <h2>Nom de variables</h2>
 <ul>
 <li>case sensitive : <code>A!=a</code></li>
@@ -655,65 +670,70 @@ Pour les développeurs :
 <li>caractères alphanumériques (éventuellement accentués suivant <code>localeToCharset()</code>, à éviter)</li>
 <li><code>.</code> et <code>_</code> autorisées</li>
 </ul>
-</section><section id="classes" class="slide level2">
+</section>
+<section id="classes" class="slide level2">
 <h2>classes</h2>
 <p>La fonction <code>class</code> renvoie la classe des objets R</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">w &lt;-<span class="st">  </span><span class="fl">12.5</span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="kw">class</span>(w)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span>  <span class="fl">12.5</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(w)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">x &lt;-<span class="st">  </span><span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="kw">class</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span>  <span class="cn">TRUE</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;logical&quot;</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">y &lt;-<span class="st">  &quot;abc&quot;</span></a>
-<a class="sourceLine" id="cb18-2" title="2"><span class="kw">class</span>(y)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span>  <span class="st">&quot;abc&quot;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(y)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-</section><section id="classes-1" class="slide level2">
+</section>
+<section id="classes-1" class="slide level2">
 <h2>classes</h2>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">z1 &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;Leonardo&quot;</span>, <span class="st">&quot;Rapahelo&quot;</span>, <span class="st">&quot;Michelangelo&quot;</span>, <span class="st">&quot;Donatello&quot;</span>)</a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="kw">class</span>(z1)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>z1 <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="st">&quot;Leonardo&quot;</span>, <span class="st">&quot;Rapahelo&quot;</span>, <span class="st">&quot;Michelangelo&quot;</span>, <span class="st">&quot;Donatello&quot;</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(z1)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">z2 &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb22-2" title="2"><span class="kw">class</span>(z2)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>z2 <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(z2)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">z3 &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="st">&quot;pouet&quot;</span>)</a>
-<a class="sourceLine" id="cb24-2" title="2"><span class="kw">class</span>(z3) <span class="co"># ? </span></a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>z3 <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="st">&quot;pouet&quot;</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(z3) <span class="co"># ? </span></span></code></pre></div>
 <p>Quelle est la classe de z3 ? Pourquoi ? <br> On peut faire un peu de POO en R, nous ne le ferons pas.</p>
-</section><section id="aperçu-des-collections-et-tableaux" class="slide level2">
+</section>
+<section id="aperçu-des-collections-et-tableaux" class="slide level2">
 <h2>Aperçu des collections et tableaux</h2>
 <p>Vecteurs définis par <code>c()</code> (extension)</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">w &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb25-2" title="2">w <span class="op">+</span><span class="st"> </span><span class="dv">1</span> </a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>w <span class="sc">+</span> <span class="dv">1</span> </span></code></pre></div>
 <pre><code>## [1] 2 3 4 5 6</code></pre>
 <p>ou <code>vector(mode, length)</code> (initialisation, ~intension)</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">v &lt;-<span class="st">  </span><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb27-2" title="2">v </a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span>  <span class="fu">vector</span>(<span class="st">&quot;character&quot;</span>, <span class="dv">5</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>v </span></code></pre></div>
 <pre><code>## [1] &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot;</code></pre>
 <p>Tous les éléments doivent être de même type</p>
-</section><section id="aperçu-des-collections-et-tableaux-1" class="slide level2">
+</section>
+<section id="aperçu-des-collections-et-tableaux-1" class="slide level2">
 <h2>Aperçu des collections et tableaux</h2>
 <p>Tableaux définis par <code>array(data, dim )</code></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">v &lt;-<span class="st">  </span><span class="kw">array</span>(<span class="st">&quot;go&quot;</span>, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb29-2" title="2">v </a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span>  <span class="fu">array</span>(<span class="st">&quot;go&quot;</span>, <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>v </span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,] &quot;go&quot; &quot;go&quot; &quot;go&quot;
 ## [2,] &quot;go&quot; &quot;go&quot; &quot;go&quot;</code></pre>
 <p>Matrices</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">m &lt;-<span class="st">  </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb31-2" title="2">m </a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span>  <span class="fu">matrix</span>(<span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">8</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>m </span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
 ## [1,]    1    1    1    1    1    1    1    1
 ## [2,]    1    1    1    1    1    1    1    1
 ## [3,]    1    1    1    1    1    1    1    1
 ## [4,]    1    1    1    1    1    1    1    1</code></pre>
-</section><section id="objets-structurés" class="slide level2">
+</section>
+<section id="objets-structurés" class="slide level2">
 <h2>Objets structurés</h2>
 <p>Objets plus complexes (~struct en C, named tuple en python)</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">tmnt &lt;-<span class="st">  </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb33-2" title="2">              <span class="dt">nom=</span> <span class="kw">c</span>(<span class="st">&quot;leo&quot;</span>, <span class="st">&quot;raph&quot;</span>, <span class="st">&quot;mick&quot;</span>, <span class="st">&quot;don&quot;</span>), </a>
-<a class="sourceLine" id="cb33-3" title="3">              <span class="dt">couleur =</span><span class="kw">c</span>(<span class="st">&quot;bleu&quot;</span>,<span class="st">&quot;rouge&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;violet&quot;</span>), </a>
-<a class="sourceLine" id="cb33-4" title="4">              <span class="dt">age=</span><span class="dv">17</span><span class="op">:</span><span class="dv">14</span></a>
-<a class="sourceLine" id="cb33-5" title="5">              )</a>
-<a class="sourceLine" id="cb33-6" title="6">tmnt</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>tmnt <span class="ot">&lt;-</span>  <span class="fu">list</span>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">nom=</span> <span class="fu">c</span>(<span class="st">&quot;leo&quot;</span>, <span class="st">&quot;raph&quot;</span>, <span class="st">&quot;mick&quot;</span>, <span class="st">&quot;don&quot;</span>), </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">couleur =</span><span class="fu">c</span>(<span class="st">&quot;bleu&quot;</span>,<span class="st">&quot;rouge&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;violet&quot;</span>), </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">age=</span><span class="dv">17</span><span class="sc">:</span><span class="dv">14</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>tmnt</span></code></pre></div>
 <pre><code>## $nom
 ## [1] &quot;leo&quot;  &quot;raph&quot; &quot;mick&quot; &quot;don&quot; 
 ## 
@@ -722,13 +742,14 @@ Pour les développeurs :
 ## 
 ## $age
 ## [1] 17 16 15 14</code></pre>
-</section><section id="objets-structurés-imbriqués" class="slide level2">
+</section>
+<section id="objets-structurés-imbriqués" class="slide level2">
 <h2>Objets structurés imbriqués</h2>
 <p><span style="font-size:0.8em;"> les attributs peuvent être de longueur différentes, un attribut peut lui même être une liste : ici l’attribut <code>tmnt</code> de l’objet <code>nested</code> est une liste <span></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">nested &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">tmnt=</span> tmnt, </a>
-<a class="sourceLine" id="cb35-2" title="2">              <span class="dt">auteurs =</span><span class="kw">c</span>(<span class="st">&quot;Kevin Eastman&quot;</span>,<span class="st">&quot;Peter Laird&quot;</span>), </a>
-<a class="sourceLine" id="cb35-3" title="3">              <span class="dt">annee_parution=</span> <span class="dv">1984</span>)</a>
-<a class="sourceLine" id="cb35-4" title="4">nested</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>nested <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">tmnt=</span> tmnt, </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">auteurs =</span><span class="fu">c</span>(<span class="st">&quot;Kevin Eastman&quot;</span>,<span class="st">&quot;Peter Laird&quot;</span>), </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">annee_parution=</span> <span class="dv">1984</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>nested</span></code></pre></div>
 <pre><code>## $tmnt
 ## $tmnt$nom
 ## [1] &quot;leo&quot;  &quot;raph&quot; &quot;mick&quot; &quot;don&quot; 
@@ -745,7 +766,8 @@ Pour les développeurs :
 ## 
 ## $annee_parution
 ## [1] 1984</code></pre>
-</section><section id="dataframes" class="slide level2">
+</section>
+<section id="dataframes" class="slide level2">
 <h2>Dataframes</h2>
 <p>Si tous les attributs d’un objet/liste ont la <strong>même taille</strong>, on parle de <strong>dataframe</strong> (~cf panda en python).</p>
 <p>Format courant (et fortement conseillé) :</p>
@@ -905,14 +927,15 @@ Pour les développeurs :
 ## 148          6.5         3.0          5.2         2.0  virginica
 ## 149          6.2         3.4          5.4         2.3  virginica
 ## 150          5.9         3.0          5.1         1.8  virginica</code></pre>
-</section><section id="dataframes-1" class="slide level2">
+</section>
+<section id="dataframes-1" class="slide level2">
 <h2>Dataframes</h2>
 <p>Les colonnes d’un dataframe sont nommées: <code>names(mydata)</code></p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">data</span>(iris)</a>
-<a class="sourceLine" id="cb38-2" title="2"><span class="kw">names</span>(iris)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(iris)</span></code></pre></div>
 <pre><code>## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot;  &quot;Species&quot;</code></pre>
 <p>opérateur de sélection d’attributs <code>$</code> (colonne pour les dataframe) ~notation pointée en POO</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">iris<span class="op">$</span>Sepal.Length </a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">$</span>Sepal.Length </span></code></pre></div>
 <pre><code>##   [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1
 ##  [19] 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5 4.9 5.0
 ##  [37] 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0 7.0 6.4 6.9 5.5
@@ -922,17 +945,29 @@ Pour les développeurs :
 ## [109] 6.7 7.2 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0 6.9 5.6 7.7 6.3 6.7 7.2
 ## [127] 6.2 6.1 6.4 7.2 7.4 7.9 6.4 6.3 6.1 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8
 ## [145] 6.7 6.7 6.3 6.5 6.2 5.9</code></pre>
-</section><section id="sélection-dans-un-tableau" class="slide level2">
+</section>
+<section id="sélection-dans-un-tableau" class="slide level2">
 <h2>Sélection dans un tableau</h2>
 <p>Pour un d’un dataframe <code>df</code></p>
 <p>Élément ligne <code>i</code> colonne <code>j</code> : <code>df[i,j]</code></p>
 <p>Toutes les lignes , colonne <code>j</code> : <code>df[,j]</code></p>
 <p>Toutes les colonnes , ligne <code>i</code> : <code>df[i,]</code></p>
 <p>Toutes les lignes sauf la ligne <code>i</code> , toutes les colonnes : <code>df[-i,]</code></p>
-</section><section id="lire-un-fichier-un-exemple-de-doc" class="slide level2">
+</section>
+<section id="connaître-les-caractéristiques-des-objets" class="slide level2">
+<h2>Connaître les caractéristiques des objets</h2>
+<p><strong>Classe/Type</strong> des objets : fonction <code>class</code></p>
+<p><strong>noms des colonnes</strong> des tableaux : fonction <code>colnames</code></p>
+<p><strong>Structure</strong> des objets : fonction <code>str</code></p>
+<p><strong>Dimensions</strong> des objets : fonction <code>dim</code></p>
+<p><strong>Nombre de lignes</strong> d’un objet : fonction <code>nrow</code></p>
+<p><strong>Nombre de colonnes</strong> d’un objet : fonction <code>ncol</code></p>
+<p><strong>Taille</strong> d’un vecteur : fonction <code>length</code></p>
+</section>
+<section id="lire-un-fichier-un-exemple-de-doc" class="slide level2">
 <h2>Lire un fichier : un exemple de doc</h2>
 <p>Documentation de la fonction read.csv</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">read.csv</span>(file, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span>, <span class="dt">dec =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">comment.char =</span> <span class="st">&quot;&quot;</span>, ...)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(file, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">quote =</span> <span class="st">&quot;</span><span class="sc">\&quot;</span><span class="st">&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;.&quot;</span>, <span class="at">fill =</span> <span class="cn">TRUE</span>, <span class="at">comment.char =</span> <span class="st">&quot;&quot;</span>, ...)</span></code></pre></div>
 <ul>
 <li>N.B. arguments avec <strong>valeurs par défaut</strong></li>
 <li>Description : ce que fait la fonction<br />
@@ -945,22 +980,28 @@ Pour les développeurs :
 <li>[…]</li>
 </ul>
 </section></section>
-<section><section id="concepts-du-langage-structure-de-contrôle-du-langage" class="title-slide slide level1"><h1>Concepts du langage <br> <span style="font-size: 0.6em;">Structure de contrôle du langage </span></h1></section><section id="conditionnelles" class="slide level2">
+<section>
+<section id="concepts-du-langage-structure-de-contrôle-du-langage" class="title-slide slide level1">
+<h1>Concepts du langage <br> <span style="font-size: 0.6em;">Structure de contrôle du langage </span></h1>
+
+</section>
+<section id="conditionnelles" class="slide level2">
 <h2>Conditionnelles</h2>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">x &lt;-<span class="st">  </span><span class="kw">rnorm</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb43-2" title="2"><span class="cf">if</span>(x<span class="op">&gt;</span><span class="fl">0.5</span>){</a>
-<a class="sourceLine" id="cb43-3" title="3">  <span class="kw">cat</span>(<span class="st">&quot;Pile&quot;</span>)</a>
-<a class="sourceLine" id="cb43-4" title="4">}<span class="cf">else</span>{</a>
-<a class="sourceLine" id="cb43-5" title="5">  <span class="kw">cat</span>(<span class="st">&quot;Face&quot;</span>)</a>
-<a class="sourceLine" id="cb43-6" title="6">}</a></code></pre></div>
-<pre><code>## Pile</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span>  <span class="fu">rnorm</span>(<span class="dv">1</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x<span class="sc">&gt;</span><span class="fl">0.5</span>){</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Pile&quot;</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Face&quot;</span>)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Face</code></pre>
 <p>Au passage :</p>
 <ul>
 <li><code>rnorm()</code> échantillone selon une loi normale<br />
 </li>
 <li><code>cat()</code> affiche sur la sortie standard / concatène (~print)</li>
 </ul>
-</section><section id="conditionnelles-1" class="slide level2">
+</section>
+<section id="conditionnelles-1" class="slide level2">
 <h2>Conditionnelles</h2>
 <table>
 <thead>
@@ -997,20 +1038,22 @@ Pour les développeurs :
 </tbody>
 </table>
 <p><br> + opérateurs binaires classiques: <code>&gt;, &lt; , &gt;= , &lt;=, == , != ,  %in%</code></p>
-</section><section id="boucles" class="slide level2">
+</section>
+<section id="boucles" class="slide level2">
 <h2>Boucles</h2>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){</a>
-<a class="sourceLine" id="cb45-2" title="2">  xx &lt;-<span class="st">  </span>i <span class="op">*</span><span class="st"> </span><span class="dv">2</span> </a>
-<a class="sourceLine" id="cb45-3" title="3">  <span class="kw">cat</span>(xx, <span class="st">&quot; &quot;</span>)</a>
-<a class="sourceLine" id="cb45-4" title="4">  }</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  xx <span class="ot">&lt;-</span>  i <span class="sc">*</span> <span class="dv">2</span> </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(xx, <span class="st">&quot; &quot;</span>)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
 <pre><code>## 2  4  6  8  10  12  14  16  18  20</code></pre>
 <p><span style="color:red">⚠ </span> Au-delà de deux boucles imbriquées, les performances de R s’effondrent</p>
-</section><section id="boucles-1" class="slide level2">
+</section>
+<section id="boucles-1" class="slide level2">
 <h2>Boucles</h2>
 <p>Toute séquence peut être utilisée pour l’itération :</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="cf">for</span>(i <span class="cf">in</span> LETTERS){</a>
-<a class="sourceLine" id="cb47-2" title="2">  <span class="kw">print</span>(i)</a>
-<a class="sourceLine" id="cb47-3" title="3">  }</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> LETTERS){</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
 <pre><code>## [1] &quot;A&quot;
 ## [1] &quot;B&quot;
 ## [1] &quot;C&quot;
@@ -1037,67 +1080,92 @@ Pour les développeurs :
 ## [1] &quot;X&quot;
 ## [1] &quot;Y&quot;
 ## [1] &quot;Z&quot;</code></pre>
-</section><section id="boucles-2" class="slide level2">
+</section>
+<section id="boucles-2" class="slide level2">
 <h2>Boucles</h2>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">i &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb49-2" title="2"><span class="cf">while</span>(i <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span>){</a>
-<a class="sourceLine" id="cb49-3" title="3">  i &lt;-<span class="st"> </span>i<span class="op">+</span><span class="dv">1</span> </a>
-<a class="sourceLine" id="cb49-4" title="4">  <span class="kw">cat</span>(i,<span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb49-5" title="5">  }</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(i <span class="sc">&lt;</span> <span class="dv">15</span>){</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i<span class="sc">+</span><span class="dv">1</span> </span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(i,<span class="st">&quot;&quot;</span>)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
 <pre><code>## 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15</code></pre>
-</section><section id="boucles-3" class="slide level2">
+</section>
+<section id="boucles-3" class="slide level2">
 <h2>Boucles</h2>
 <p>Fonction pratiques pour générer des séquences : <code>seq</code> et <code>rep</code></p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">24</span>, <span class="dt">by=</span> <span class="fl">0.33</span>, <span class="dt">length.out =</span> <span class="dv">17</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from=</span><span class="dv">24</span>, <span class="at">by=</span> <span class="fl">0.33</span>, <span class="at">length.out =</span> <span class="dv">17</span>)</span></code></pre></div>
 <pre><code>##  [1] 24.00 24.33 24.66 24.99 25.32 25.65 25.98 26.31 26.64 26.97 27.30 27.63
 ## [13] 27.96 28.29 28.62 28.95 29.28</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;lundi&quot;</span>, <span class="st">&quot;mardi&quot;</span>, <span class="st">&quot;mercredi&quot;</span>, <span class="st">&quot;jeudi&quot;</span>), <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;lundi&quot;</span>, <span class="st">&quot;mardi&quot;</span>, <span class="st">&quot;mercredi&quot;</span>, <span class="st">&quot;jeudi&quot;</span>), <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;lundi&quot;    &quot;mardi&quot;    &quot;mercredi&quot; &quot;jeudi&quot;    &quot;lundi&quot;    &quot;mardi&quot;   
 ##  [7] &quot;mercredi&quot; &quot;jeudi&quot;    &quot;lundi&quot;    &quot;mardi&quot;    &quot;mercredi&quot; &quot;jeudi&quot;   
 ## [13] &quot;lundi&quot;    &quot;mardi&quot;    &quot;mercredi&quot; &quot;jeudi&quot;</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">cat</span>(<span class="kw">c</span>((<span class="kw">rep</span>(<span class="st">&quot;po-&quot;</span>, <span class="dv">4</span>)),<span class="st">&quot;ker face&quot;</span>), <span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">c</span>((<span class="fu">rep</span>(<span class="st">&quot;po-&quot;</span>, <span class="dv">4</span>)),<span class="st">&quot;ker face&quot;</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## po-po-po-po-ker face</code></pre>
-<div style="text-align:right; top:-100px;">
-<p>&lt;img src=“./gaga.jpg”, width=10%&gt;</p>
-</div>
-</section><section id="fonction" class="slide level2">
+</section>
+<section id="fonction" class="slide level2">
 <h2>Fonction</h2>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">nom_de_la_fonction &lt;-<span class="st"> </span><span class="cf">function</span>(arg1, arg2, ...){ </a>
-<a class="sourceLine" id="cb57-2" title="2">    ⋮</a>
-<a class="sourceLine" id="cb57-3" title="3">  code de la fonction </a>
-<a class="sourceLine" id="cb57-4" title="4">    ⋮</a>
-<a class="sourceLine" id="cb57-5" title="5">    ⋮ </a>
-<a class="sourceLine" id="cb57-6" title="6">    ⋮</a>
-<a class="sourceLine" id="cb57-7" title="7">  <span class="kw">return</span>(resultat)</a>
-<a class="sourceLine" id="cb57-8" title="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>nom_de_la_fonction <span class="ot">&lt;-</span> <span class="cf">function</span>(arg1, arg2, ...){ </span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    ⋮</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  code de la fonction </span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>    ⋮</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>    ⋮ </span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>    ⋮</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(resultat)</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section></section>
-<section><section id="les-librairies-du-futur-dplyr-sf-cartography-et-ggplot2" class="title-slide slide level1"><h1>les librairies du futur <br> <span style="font-size: 0.6em;">dplyr, sf, cartography et ggplot2 </span></h1></section><section id="dplyr" class="slide level2">
+<section>
+<section id="les-librairies-du-futur-dplyr-sf-cartography-et-ggplot2" class="title-slide slide level1">
+<h1>les librairies du futur <br> <span style="font-size: 0.6em;">dplyr, sf, cartography et ggplot2 </span></h1>
+
+</section>
+<section id="dplyr" class="slide level2">
 <h2>dplyr</h2>
 <p>Transformation, combinaison, requêtage de données</p>
 <p>e.g. : <code>group_by, filter, intersects, union, join, n_distinct</code></p>
 <p><a href="https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf" class="uri">https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf</a></p>
-</section><section id="sf" class="slide level2">
+</section>
+<section id="sf" class="slide level2">
 <h2>sf</h2>
 <p>package de manipulation de données spatiales (vecteur), implémente la norme sf (Simple Feature) , comme postgis.</p>
 <p>La géométrie des objets “voyage” avec eux à chaque opération.</p>
-</section><section id="ggplot2" class="slide level2">
+</section>
+<section id="ggplot2" class="slide level2">
 <h2>ggplot2</h2>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb58-2" title="2"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(Sepal.Length, Sepal.Width, <span class="dt">colour =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb58-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb58-4" title="4"><span class="st">  </span><span class="kw">geom_smooth</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Sepal.Width, <span class="at">colour =</span> Species)) <span class="sc">+</span> </span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div>
 <p><img src="introduction_R_files/figure-revealjs/ggplotdemo-1.png" width="768" /></p>
 <p><a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf" class="uri">https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf</a></p>
-</section><section id="cartography" class="slide level2">
+</section>
+<section id="cartography" class="slide level2">
 <h2>cartography</h2>
 <p><img src="introduction_R_files/figure-revealjs/cartodemo-1.png" width="768" /></p>
 <p><a href="https://cran.r-project.org/web/packages/cartography/vignettes/cartography.html" class="uri">https://cran.r-project.org/web/packages/cartography/vignettes/cartography.html</a></p>
 <p><a href="https://rgeomatic.hypotheses.org/category/cartography" class="uri">https://rgeomatic.hypotheses.org/category/cartography</a></p>
-</section><section id="rayshader" class="slide level2">
+</section>
+<section id="rayshader" class="slide level2">
 <h2>rayshader</h2>
+<pre><code>## Warning in rgl.snapshot(filename, fmt, top): this build of rgl does not support
+## snapshots
+
+## Warning in rgl.snapshot(filename, fmt, top): this build of rgl does not support
+## snapshots
+
+## Warning in rgl.snapshot(filename, fmt, top): this build of rgl does not support
+## snapshots</code></pre>
 <p><img src="introduction_R_files/figure-revealjs/rayshader-1.png" width="768" /></p>
-</section><section id="tmap" class="slide level2">
+</section>
+<section id="tmap" class="slide level2">
 <h2>tmap</h2>
+<pre><code>## Registered S3 methods overwritten by &#39;stars&#39;:
+##   method             from
+##   st_bbox.SpatRaster sf  
+##   st_crs.SpatRaster  sf</code></pre>
+<pre><code>## old-style crs object detected; please recreate object with a recent sf::st_crs()
+## old-style crs object detected; please recreate object with a recent sf::st_crs()
+## old-style crs object detected; please recreate object with a recent sf::st_crs()</code></pre>
 <p><img src="introduction_R_files/figure-revealjs/tmap1-1.png" width="768" /></p>
 </section></section>
     </div>
